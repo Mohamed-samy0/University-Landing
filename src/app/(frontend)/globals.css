@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand-orange: #e84925;
+  --color-brand-navy: #273480;
+  --color-brand-green: #348141;
+  --color-brand-ink: #101828;
+
+  --font-futura: var(--font-futura);
+}
+
+@utility clip-path-skewed {
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+@layer base {
+  body {
+    background-color: #fdfbfb;
+    color: var(--color-brand-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+}
