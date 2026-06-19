@@ -20,6 +20,8 @@ import { SectionTitles } from './globals/SectionTitles'
 import { Footer } from './globals/Footer'
 import { ContactForm } from './globals/ContactForm'
 import { PartnerMarquee } from './globals/PartnerMarquee'
+import { MajorsSection } from './globals/MajorsSection'
+import { Majors } from './collections/Majors'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,8 +33,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Programs, Events, Testimonials, Partners, News],
-  globals: [Hero, Header, Accordion, Marquee, SectionTitles, Footer, ContactForm, PartnerMarquee],
+  collections: [Users, Media, Programs, Events, Testimonials, Partners, News, Majors],
+  globals: [
+    Hero,
+    Header,
+    Accordion,
+    Marquee,
+    SectionTitles,
+    Footer,
+    ContactForm,
+    PartnerMarquee,
+    MajorsSection,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

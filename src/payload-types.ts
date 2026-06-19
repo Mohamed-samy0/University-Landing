@@ -74,6 +74,7 @@ export interface Config {
     testimonials: Testimonial;
     partners: Partner;
     news: News;
+    majors: Major;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
+    majors: MajorsSelect<false> | MajorsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -106,6 +108,7 @@ export interface Config {
     footer: Footer;
     contactForm: ContactForm;
     partnerMarquee: PartnerMarquee;
+    majorsSection: MajorsSection;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -116,6 +119,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     contactForm: ContactFormSelect<false> | ContactFormSelect<true>;
     partnerMarquee: PartnerMarqueeSelect<false> | PartnerMarqueeSelect<true>;
+    majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
   };
   locale: null;
   widgets: {
@@ -316,6 +320,19 @@ export interface News {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majors".
+ */
+export interface Major {
+  id: string;
+  title: string;
+  programsCount: number;
+  image: string | Media;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -365,6 +382,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news';
         value: string | News;
+      } | null)
+    | ({
+        relationTo: 'majors';
+        value: string | Major;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -556,6 +577,18 @@ export interface NewsSelect<T extends boolean = true> {
   publishedDate?: T;
   author?: T;
   category?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majors_select".
+ */
+export interface MajorsSelect<T extends boolean = true> {
+  title?: T;
+  programsCount?: T;
+  image?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -797,6 +830,17 @@ export interface PartnerMarquee {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majorsSection".
+ */
+export interface MajorsSection {
+  id: string;
+  tag: string;
+  title: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
@@ -989,6 +1033,17 @@ export interface PartnerMarqueeSelect<T extends boolean = true> {
   topRibbonImage?: T;
   middleRibbonImage?: T;
   bottomRibbonText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majorsSection_select".
+ */
+export interface MajorsSectionSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

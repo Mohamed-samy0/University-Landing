@@ -1,26 +1,22 @@
-// src/components/slider/Slider.types.ts
-
-export interface SliderCard {
-  id: string;
-  title: string;
-  description?: string;
-  image: {
-    url: string;
-    alt: string;
-    width: number;
-    height: number;
-  };
-  badge?: {
-    text: string;
-    position: 'top-left' | 'top-right';
-  };
-  link?: string;
+export interface MajorMedia {
+  url: string
+  alt?: string
 }
 
-export interface SliderProps {
-  title: string;
-  cards: SliderCard[];
-  slidesToShow?: number; // default: 3
-  autoplay?: boolean;
-  autoplayInterval?: number; // default: 5000ms
+export interface Major {
+  id: string
+  title: string
+  programsCount: number
+  image: MajorMedia
+  order?: number
+}
+
+export interface MajorsSectionData {
+  tag: string
+  title: string
+}
+
+export interface CoreMajorsSliderProps {
+  sectionData: MajorsSectionData
+  majors: Major[]
 }
