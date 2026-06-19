@@ -22,6 +22,9 @@ import { ContactForm } from './globals/ContactForm'
 import { PartnerMarquee } from './globals/PartnerMarquee'
 import { MajorsSection } from './globals/MajorsSection'
 import { Majors } from './collections/Majors'
+import { GraduateSection } from './globals/GraduateSection'
+import { Graduates } from './collections/Graduates'
+import { ApplicationJourneyBlock } from './globals/ApplicationJourney'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,7 +36,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Programs, Events, Testimonials, Partners, News, Majors],
+  collections: [Users, Media, Programs, Events, Testimonials, Partners, News, Majors, Graduates],
   globals: [
     Hero,
     Header,
@@ -44,6 +47,8 @@ export default buildConfig({
     ContactForm,
     PartnerMarquee,
     MajorsSection,
+    GraduateSection,
+    ApplicationJourneyBlock,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

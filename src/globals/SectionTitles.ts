@@ -16,10 +16,13 @@ export const SectionTitles: GlobalConfig = {
       defaultValue: 'Discover Your Path Across 5 Core Majors',
     },
     {
-      name: 'eventsTitle',
-      type: 'text',
-      label: 'Events Section Title',
-      defaultValue: "Don't Miss Our Upcoming Events",
+      name: 'events',
+      type: 'group',
+      label: 'Events Section Headers',
+      fields: [
+        { name: 'tag', type: 'text', defaultValue: 'EVENTS' },
+        { name: 'title', type: 'text', defaultValue: "Don't Miss Our Upcoming Events!" },
+      ],
     },
     {
       name: 'testimonialsTitle',

@@ -29,7 +29,7 @@ export const CoreMajorsSlider = ({ sectionData, majors }: CoreMajorsSliderProps)
         <span className="bg-brand-navy text-white text-[12px] font-bold uppercase tracking-widest px-5 py-2 w-fit mb-6">
           {sectionData?.tag || 'Choose Your Future'}
         </span>
-        <h2 className="text-4xl lg:text-[52px] font-bold text-brand-ink leading-tight max-w-3xl">
+        <h2 className="text-4xl lg:text-[50px] font-bold text-brand-ink leading-tight max-w-xl">
           {sectionData?.title || 'Discover Your Path Across 5 Core Majors'}
         </h2>
       </div>

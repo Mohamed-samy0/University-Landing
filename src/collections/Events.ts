@@ -6,50 +6,12 @@ export const Events: CollectionConfig = {
     useAsTitle: 'title',
     group: 'University Content',
   },
-  access: {
-    read: () => true,
-  },
+  access: { read: () => true },
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-      label: 'Event Title',
-    },
-    {
-      name: 'description',
-      type: 'textarea',
-      required: true,
-      label: 'Event Description',
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      label: 'Event Image',
-    },
-    {
-      name: 'date',
-      type: 'date',
-      required: true,
-      label: 'Event Date',
-    },
-    {
-      name: 'time',
-      type: 'text',
-      required: true,
-      label: 'Event Time',
-    },
-    {
-      name: 'location',
-      type: 'text',
-      label: 'Event Location',
-    },
-    {
-      name: 'registrationUrl',
-      type: 'text',
-      label: 'Registration URL',
-    },
+    { name: 'title', type: 'text', required: true },
+    { name: 'description', type: 'textarea', required: true, label: 'Event Description' },
+    { name: 'image', type: 'upload', relationTo: 'media', required: true },
+    { name: 'date', type: 'date', required: true, label: 'Event Date (For the Ribbon)' },
+    { name: 'url', type: 'text', label: 'Event URL', defaultValue: '#' },
   ],
 }

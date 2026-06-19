@@ -75,6 +75,7 @@ export interface Config {
     partners: Partner;
     news: News;
     majors: Major;
+    graduates: Graduate;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     partners: PartnersSelect<false> | PartnersSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     majors: MajorsSelect<false> | MajorsSelect<true>;
+    graduates: GraduatesSelect<false> | GraduatesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -109,6 +111,8 @@ export interface Config {
     contactForm: ContactForm;
     partnerMarquee: PartnerMarquee;
     majorsSection: MajorsSection;
+    graduateSection: GraduateSection;
+    applicationJourney: ApplicationJourney;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -120,6 +124,8 @@ export interface Config {
     contactForm: ContactFormSelect<false> | ContactFormSelect<true>;
     partnerMarquee: PartnerMarqueeSelect<false> | PartnerMarqueeSelect<true>;
     majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
+    graduateSection: GraduateSectionSelect<false> | GraduateSectionSelect<true>;
+    applicationJourney: ApplicationJourneySelect<false> | ApplicationJourneySelect<true>;
   };
   locale: null;
   widgets: {
@@ -241,9 +247,7 @@ export interface Event {
   description: string;
   image: string | Media;
   date: string;
-  time: string;
-  location?: string | null;
-  registrationUrl?: string | null;
+  url?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -333,6 +337,24 @@ export interface Major {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "graduates".
+ */
+export interface Graduate {
+  id: string;
+  name: string;
+  graduationYear: number;
+  jobTitle: string;
+  company: string;
+  testimonial: string;
+  image: string | Media;
+  avatar: string | Media;
+  universityLogo?: (string | null) | Media;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -386,6 +408,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'majors';
         value: string | Major;
+      } | null)
+    | ({
+        relationTo: 'graduates';
+        value: string | Graduate;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -523,9 +549,7 @@ export interface EventsSelect<T extends boolean = true> {
   description?: T;
   image?: T;
   date?: T;
-  time?: T;
-  location?: T;
-  registrationUrl?: T;
+  url?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -588,6 +612,23 @@ export interface MajorsSelect<T extends boolean = true> {
   title?: T;
   programsCount?: T;
   image?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "graduates_select".
+ */
+export interface GraduatesSelect<T extends boolean = true> {
+  name?: T;
+  graduationYear?: T;
+  jobTitle?: T;
+  company?: T;
+  testimonial?: T;
+  image?: T;
+  avatar?: T;
+  universityLogo?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -750,7 +791,10 @@ export interface Marquee {
 export interface SectionTitle {
   id: string;
   coreMajorsTitle?: string | null;
-  eventsTitle?: string | null;
+  events?: {
+    tag?: string | null;
+    title?: string | null;
+  };
   testimonialsTitle?: string | null;
   admissionStepsTitle?: string | null;
   newsTitle?: string | null;
@@ -836,6 +880,39 @@ export interface MajorsSection {
   id: string;
   tag: string;
   title: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "graduateSection".
+ */
+export interface GraduateSection {
+  id: string;
+  tag?: string | null;
+  title?: string | null;
+  subtitle?: string | null;
+  ctaText: string;
+  ctaLink: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applicationJourney".
+ */
+export interface ApplicationJourney {
+  id: string;
+  tag: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  steps: {
+    title: string;
+    description: string;
+    id?: string | null;
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -955,7 +1032,12 @@ export interface MarqueeSelect<T extends boolean = true> {
  */
 export interface SectionTitlesSelect<T extends boolean = true> {
   coreMajorsTitle?: T;
-  eventsTitle?: T;
+  events?:
+    | T
+    | {
+        tag?: T;
+        title?: T;
+      };
   testimonialsTitle?: T;
   admissionStepsTitle?: T;
   newsTitle?: T;
@@ -1044,6 +1126,41 @@ export interface PartnerMarqueeSelect<T extends boolean = true> {
 export interface MajorsSectionSelect<T extends boolean = true> {
   tag?: T;
   title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "graduateSection_select".
+ */
+export interface GraduateSectionSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  subtitle?: T;
+  ctaText?: T;
+  ctaLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applicationJourney_select".
+ */
+export interface ApplicationJourneySelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  description?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
