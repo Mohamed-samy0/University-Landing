@@ -19,6 +19,7 @@ import { Marquee } from './globals/Marquee'
 import { SectionTitles } from './globals/SectionTitles'
 import { Footer } from './globals/Footer'
 import { ContactForm } from './globals/ContactForm'
+import { PartnerMarquee } from './globals/PartnerMarquee'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,7 +32,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Programs, Events, Testimonials, Partners, News],
-  globals: [Hero, Header, Accordion, Marquee, SectionTitles, Footer, ContactForm],
+  globals: [Hero, Header, Accordion, Marquee, SectionTitles, Footer, ContactForm, PartnerMarquee],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

@@ -105,6 +105,7 @@ export interface Config {
     sectionTitles: SectionTitle;
     footer: Footer;
     contactForm: ContactForm;
+    partnerMarquee: PartnerMarquee;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -114,6 +115,7 @@ export interface Config {
     sectionTitles: SectionTitlesSelect<false> | SectionTitlesSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     contactForm: ContactFormSelect<false> | ContactFormSelect<true>;
+    partnerMarquee: PartnerMarqueeSelect<false> | PartnerMarqueeSelect<true>;
   };
   locale: null;
   widgets: {
@@ -271,6 +273,14 @@ export interface Partner {
   image: string | Media;
   url: string;
   description?: string | null;
+  position: 'tl' | 'tr' | 'bl' | 'br';
+  stats?:
+    | {
+        value?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -523,6 +533,14 @@ export interface PartnersSelect<T extends boolean = true> {
   image?: T;
   url?: T;
   description?: T;
+  position?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -767,6 +785,18 @@ export interface ContactForm {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerMarquee".
+ */
+export interface PartnerMarquee {
+  id: string;
+  topRibbonImage: string | Media;
+  middleRibbonImage: string | Media;
+  bottomRibbonText: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
@@ -947,6 +977,18 @@ export interface ContactFormSelect<T extends boolean = true> {
   successMessage?: T;
   errorMessage?: T;
   submitEndpoint?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerMarquee_select".
+ */
+export interface PartnerMarqueeSelect<T extends boolean = true> {
+  topRibbonImage?: T;
+  middleRibbonImage?: T;
+  bottomRibbonText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
