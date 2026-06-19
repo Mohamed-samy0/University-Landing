@@ -25,6 +25,7 @@ import { Majors } from './collections/Majors'
 import { GraduateSection } from './globals/GraduateSection'
 import { Graduates } from './collections/Graduates'
 import { ApplicationJourneyBlock } from './globals/ApplicationJourney'
+import { NewsSectionBlock } from './globals/NewsSection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,6 +50,7 @@ export default buildConfig({
     MajorsSection,
     GraduateSection,
     ApplicationJourneyBlock,
+    NewsSectionBlock
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

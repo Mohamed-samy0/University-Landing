@@ -4,6 +4,7 @@ import { useCallback } from 'react'
 import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { CoreMajorsSliderProps } from './Slider.types'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 export const CoreMajorsSlider = ({ sectionData, majors }: CoreMajorsSliderProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -79,19 +80,7 @@ export const CoreMajorsSlider = ({ sectionData, majors }: CoreMajorsSliderProps)
           className="w-14 h-14 rounded-full bg-white border-[1.5px] border-gray-200 shadow-sm flex items-center justify-center text-brand-ink hover:text-brand-orange hover:border-brand-orange transition-all focus:outline-none group"
           aria-label="Previous Slide"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="transition-transform group-hover:-translate-x-1"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
+          <ArrowLeft className="transition-transform group-hover:-translate-x-1" />
         </button>
 
         <button
@@ -99,19 +88,7 @@ export const CoreMajorsSlider = ({ sectionData, majors }: CoreMajorsSliderProps)
           className="w-14 h-14 rounded-full bg-brand-orange border-[1.5px] border-brand-orange shadow-md flex items-center justify-center text-white hover:bg-orange-700 hover:border-orange-700 transition-all focus:outline-none group"
           aria-label="Next Slide"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="transition-transform group-hover:translate-x-1"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
+          <ArrowRight className='transition-transform group-hover:translate-x-1' />
         </button>
       </div>
     </section>

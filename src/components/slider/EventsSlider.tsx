@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import useEmblaCarousel from 'embla-carousel-react'
 import { EventsSliderProps } from './Events.types'
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 
 export const EventsSlider = ({ sectionData, events }: EventsSliderProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -89,38 +90,14 @@ export const EventsSlider = ({ sectionData, events }: EventsSliderProps) => {
             className="w-14 h-14 rounded-full bg-white border-[1.5px] border-gray-200 shadow-sm flex items-center justify-center text-[#101828] hover:text-[#e84925] hover:border-[#e84925] transition-all focus:outline-none group"
             aria-label="Previous Slide"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-transform group-hover:-translate-x-1"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
+            <ArrowLeft className="transition-transform group-hover:-translate-x-1" />
           </button>
           <button
             onClick={scrollNext}
             className="w-14 h-14 rounded-full bg-[#e84925] border-[1.5px] border-[#e84925] shadow-md flex items-center justify-center text-white hover:bg-[#d03d1c] hover:border-[#d03d1c] transition-all focus:outline-none group"
             aria-label="Next Slide"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-transform group-hover:translate-x-1"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
+            <ArrowRight className="transition-transform group-hover:translate-x-1" />
           </button>
         </div>
 
@@ -130,19 +107,7 @@ export const EventsSlider = ({ sectionData, events }: EventsSliderProps) => {
         >
           See All Events
           <span className="bg-[#e84925] text-white rounded-full p-2.5 transition-transform group-hover:translate-x-1 group-hover:bg-white group-hover:text-[#e84925]">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
+            <ArrowUpRight  size={20}/>
           </span>
         </Link>
       </div>

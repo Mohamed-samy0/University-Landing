@@ -7,6 +7,8 @@ import { CoreMajorsSlider } from '@/components/slider/CoreMajorsSlider'
 import { EventsSlider } from '@/components/slider/EventsSlider'
 import { GraduateSlider } from '@/components/slider/GraduateSlider'
 import { ApplicationJourney } from '@/components/journey/ApplicationJourney'
+import { NewsSectionData } from '@/components/news/News.types'
+import { NewsSection } from '@/components/news/NewsSection'
 
 export default async function HomePage() {
   const payload = await getPayload({ config: configPromise })
@@ -55,6 +57,13 @@ export default async function HomePage() {
     slug: 'applicationJourney',
   })
 
+  const rawNewsData = await payload.findGlobal({
+    slug: 'newsSection',
+    depth: 2,
+  })
+
+  const newsData = rawNewsData as unknown as NewsSectionData
+
   return (
     <div className="flex flex-col w-full">
       <Hero data={heroData} />
@@ -64,6 +73,9 @@ export default async function HomePage() {
       <EventsSlider sectionData={sectionTitles.events} events={eventsResponse.docs} />
       <GraduateSlider sectionData={graduateSectionData} graduates={graduatesResponse.docs} />
       {journeyData && <ApplicationJourney data={journeyData} />}
+      {newsData && newsData.featuredNews && newsData.featuredNews.length > 0 && (
+        <NewsSection data={newsData} />
+      )}
     </div>
   )
 }

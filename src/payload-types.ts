@@ -113,6 +113,7 @@ export interface Config {
     majorsSection: MajorsSection;
     graduateSection: GraduateSection;
     applicationJourney: ApplicationJourney;
+    newsSection: NewsSection;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -126,6 +127,7 @@ export interface Config {
     majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
     graduateSection: GraduateSectionSelect<false> | GraduateSectionSelect<true>;
     applicationJourney: ApplicationJourneySelect<false> | ApplicationJourneySelect<true>;
+    newsSection: NewsSectionSelect<false> | NewsSectionSelect<true>;
   };
   locale: null;
   widgets: {
@@ -299,26 +301,10 @@ export interface Partner {
 export interface News {
   id: string;
   title: string;
-  summary: string;
+  category: string;
   image: string | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  publishedDate: string;
-  author?: string | null;
-  category?: ('Academics' | 'Campus Life' | 'Research' | 'Athletics' | 'Community') | null;
+  date: string;
+  featured?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -595,12 +581,10 @@ export interface PartnersSelect<T extends boolean = true> {
  */
 export interface NewsSelect<T extends boolean = true> {
   title?: T;
-  summary?: T;
-  image?: T;
-  content?: T;
-  publishedDate?: T;
-  author?: T;
   category?: T;
+  image?: T;
+  date?: T;
+  featured?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -918,6 +902,21 @@ export interface ApplicationJourney {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsSection".
+ */
+export interface NewsSection {
+  id: string;
+  tag: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  featuredNews: (string | News)[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
@@ -1161,6 +1160,21 @@ export interface ApplicationJourneySelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsSection_select".
+ */
+export interface NewsSectionSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  description?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  featuredNews?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

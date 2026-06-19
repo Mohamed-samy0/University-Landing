@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ApplicationJourneyProps } from './ApplicationJourney.types'
+import { ArrowUpRight } from 'lucide-react'
 
 export const ApplicationJourney = ({ data }: ApplicationJourneyProps) => {
   if (!data) return null
@@ -25,23 +26,11 @@ export const ApplicationJourney = ({ data }: ApplicationJourneyProps) => {
 
             <Link
               href={data.buttonLink || '#'}
-              className="bg-[#e84925] text-white rounded-full pl-8 pr-2 py-2 w-fit font-bold hover:bg-[#d03d1c] transition-colors flex items-center gap-4 group shadow-md"
+              className="bg-[#e84925] text-white rounded-full pl-8 pr-4 py-2 w-fit font-bold hover:bg-[#d03d1c] transition-colors flex items-center gap-4 group shadow-md"
             >
               {data.buttonText}
               <span className="bg-white text-[#e84925] rounded-full p-2.5 transition-transform group-hover:translate-x-1">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
+                <ArrowUpRight size={20} />
               </span>
             </Link>
           </div>

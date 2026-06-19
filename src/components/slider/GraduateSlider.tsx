@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { GraduateSliderProps } from './Graduates.types'
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 
 export const GraduateSlider = ({ sectionData, graduates }: GraduateSliderProps) => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -63,38 +64,14 @@ export const GraduateSlider = ({ sectionData, graduates }: GraduateSliderProps) 
             onClick={prev}
             className="absolute left-0 md:-left-8 z-50 w-14 h-14 rounded-full bg-white border-2 border-[#e84925] flex items-center justify-center text-[#e84925] hover:bg-[#e84925] hover:text-white transition-colors focus:outline-none shadow-md hidden md:flex group"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-transform group-hover:-translate-x-1"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
+            <ArrowLeft className="transition-transform group-hover:-translate-x-1" />
           </button>
 
           <button
             onClick={next}
             className="absolute right-0 md:-right-8 z-50 w-14 h-14 rounded-full bg-white border-2 border-[#e84925] flex items-center justify-center text-[#e84925] hover:bg-[#e84925] hover:text-white transition-colors focus:outline-none shadow-md hidden md:flex group"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-transform group-hover:translate-x-1"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
+            <ArrowRight className="transition-transform group-hover:translate-x-1" />
           </button>
 
           <AnimatePresence initial={false}>
@@ -247,19 +224,7 @@ export const GraduateSlider = ({ sectionData, graduates }: GraduateSliderProps) 
           >
             {sectionData?.ctaText || 'Explore Our Career Services'}
             <span className="bg-white text-[#e84925] rounded-full p-2.5 transition-transform group-hover:translate-x-1">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
+              <ArrowUpRight size={20} />
             </span>
           </Link>
         </div>
