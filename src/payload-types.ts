@@ -826,10 +826,12 @@ export interface Footer {
  */
 export interface ContactForm {
   id: string;
-  title?: string | null;
+  tag: string;
+  title: string;
+  description: string;
   fields: {
     label: string;
-    placeholder: string;
+    placeholder?: string | null;
     type: 'text' | 'email' | 'tel';
     required?: boolean | null;
     id?: string | null;
@@ -1088,7 +1090,9 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "contactForm_select".
  */
 export interface ContactFormSelect<T extends boolean = true> {
+  tag?: T;
   title?: T;
+  description?: T;
   fields?:
     | T
     | {

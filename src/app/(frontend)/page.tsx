@@ -9,6 +9,8 @@ import { GraduateSlider } from '@/components/slider/GraduateSlider'
 import { ApplicationJourney } from '@/components/journey/ApplicationJourney'
 import { NewsSectionData } from '@/components/news/News.types'
 import { NewsSection } from '@/components/news/NewsSection'
+import { ContactFormData } from '@/components/contact/ContactForm.types'
+import { ContactFormSection } from '@/components/contact/ContactFormSection'
 
 export default async function HomePage() {
   const payload = await getPayload({ config: configPromise })
@@ -64,6 +66,12 @@ export default async function HomePage() {
 
   const newsData = rawNewsData as unknown as NewsSectionData
 
+  const rawContactData = await payload.findGlobal({
+    slug: 'contactForm',
+  })
+
+  const contactData = rawContactData as unknown as ContactFormData
+
   return (
     <div className="flex flex-col w-full">
       <Hero data={heroData} />
@@ -75,6 +83,9 @@ export default async function HomePage() {
       {journeyData && <ApplicationJourney data={journeyData} />}
       {newsData && newsData.featuredNews && newsData.featuredNews.length > 0 && (
         <NewsSection data={newsData} />
+      )}
+      {contactData && contactData.fields && contactData.fields.length > 0 && (
+        <ContactFormSection data={contactData} />
       )}
     </div>
   )

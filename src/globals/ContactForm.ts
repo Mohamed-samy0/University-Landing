@@ -10,27 +10,42 @@ export const ContactForm: GlobalConfig = {
   },
   fields: [
     {
+      name: 'tag',
+      type: 'text',
+      label: 'Tag (e.g., Take Action)',
+      defaultValue: 'Take Action',
+      required: true,
+    },
+    {
       name: 'title',
       type: 'text',
       label: 'Form Title',
-      defaultValue: 'Get In Touch',
+      defaultValue: 'Get In Touch!',
+      required: true,
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Description',
+      defaultValue: 'Have a question on mind? Leave us a message and we will contact you shortly.',
+      required: true,
     },
     {
       name: 'fields',
       type: 'array',
       required: true,
-      label: 'Form Fields',
+      label: 'Form Fields (Inputs)',
       fields: [
         {
           name: 'label',
           type: 'text',
           required: true,
-          label: 'Field Label',
+          label: 'Field Label (e.g., Your Email)',
         },
         {
           name: 'placeholder',
           type: 'text',
-          required: true,
+          required: false,
           label: 'Placeholder Text',
         },
         {
@@ -56,7 +71,7 @@ export const ContactForm: GlobalConfig = {
       name: 'submitButtonText',
       type: 'text',
       label: 'Submit Button Text',
-      defaultValue: 'Submit',
+      defaultValue: 'Send Message',
     },
     {
       name: 'successMessage',
