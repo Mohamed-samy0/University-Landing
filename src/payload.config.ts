@@ -50,7 +50,7 @@ export default buildConfig({
     MajorsSection,
     GraduateSection,
     ApplicationJourneyBlock,
-    NewsSectionBlock
+    NewsSectionBlock,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

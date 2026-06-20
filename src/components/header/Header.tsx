@@ -1,8 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Search, X, ChevronDown, ChevronRight } from 'lucide-react'
 import { HeaderProps } from './Header.types'
 
 export const Header = ({ data }: HeaderProps) => {
@@ -10,11 +12,32 @@ export const Header = ({ data }: HeaderProps) => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0)
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
 
   const handleOpenMenu = (index: number) => {
     setActiveMenuIndex(index)
     setActiveTabIndex(0)
   }
+
+  const toggleAccordion = (index: number) => {
+    setOpenAccordion(openAccordion === index ? null : index)
+  }
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+    setOpenAccordion(null)
+  }
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
 
   const activeItem =
     activeMenuIndex !== null && data?.mainNavLinks ? data.mainNavLinks[activeMenuIndex] : null
@@ -62,7 +85,7 @@ export const Header = ({ data }: HeaderProps) => {
         </div>
 
         <div className="flex justify-between items-center px-6 lg:px-10 py-3">
-          <Link href="/" className="shrink-0">
+          <Link href="/" className="shrink-0" onClick={closeMobileMenu}>
             <Image
               src={data?.logo?.url || '/logo.png'}
               alt="Logo"
@@ -128,12 +151,12 @@ export const Header = ({ data }: HeaderProps) => {
 
           <button
             className="lg:hidden p-2 text-brand-ink"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Mobile Menu"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open Mobile Menu"
           >
             <svg
-              width="24"
-              height="24"
+              width="26"
+              height="26"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -220,6 +243,144 @@ export const Header = ({ data }: HeaderProps) => {
             </div>
           )}
       </div>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed inset-0 bg-[#f3f3f3] z-[999] flex flex-col font-futura overflow-y-auto"
+          >
+            <div className="flex justify-between items-center px-6 py-6 shrink-0">
+              <Link href="/" onClick={closeMobileMenu}>
+                <Image
+                  src={data?.logo?.url || '/logo.png'}
+                  alt="Logo"
+                  width={200}
+                  height={48}
+                  className="h-9 w-auto"
+                />
+              </Link>
+              <button
+                onClick={closeMobileMenu}
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-brand-ink"
+              >
+                <X size={24} strokeWidth={2.5} />
+              </button>
+            </div>
+
+            <div className="px-6 mb-6 shrink-0">
+              <div className="flex items-center bg-white rounded-full px-5 py-4 shadow-sm relative">
+                <Search className="text-gray-400 absolute left-5" size={20} strokeWidth={2.5} />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="w-full bg-transparent outline-none pl-10 text-[16px] font-medium placeholder:text-gray-400"
+                />
+              </div>
+            </div>
+
+            <div className="px-6 pb-12 flex flex-col gap-3 flex-1">
+              {data?.mainNavLinks?.map((item, index) => (
+                <div key={index} className="bg-white rounded-[2rem] overflow-hidden shadow-sm">
+                  {/* Accordion Header */}
+                  <button
+                    onClick={() => (item.hasMegaMenu ? toggleAccordion(index) : null)}
+                    className="flex justify-between items-center w-full p-5 text-left"
+                  >
+                    {item.hasMegaMenu ? (
+                      <>
+                        <span className="text-[17px] font-bold text-brand-ink">{item.label}</span>
+                        <ChevronDown
+                          size={20}
+                          strokeWidth={2.5}
+                          className={`text-brand-ink transition-transform duration-300 ${
+                            openAccordion === index ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </>
+                    ) : (
+                      <Link
+                        href={item.url}
+                        onClick={closeMobileMenu}
+                        className="text-[17px] font-bold text-brand-ink w-full"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </button>
+
+                  <AnimatePresence>
+                    {item.hasMegaMenu && openAccordion === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="px-5 pb-5"
+                      >
+                        <div className="flex flex-col gap-3">
+                          {item.megaMenuTabs?.map((tab, tabIdx) => {
+                            if (tab.tabLogo?.url) {
+                              return (
+                                <Link
+                                  key={tabIdx}
+                                  href={tab.subLinks?.[0]?.url || item.url}
+                                  onClick={closeMobileMenu}
+                                  className="flex justify-between items-center p-4 rounded-2xl bg-[#f6f6f6] hover:bg-gray-100 transition-colors"
+                                >
+                                  <div className="flex flex-col gap-1.5">
+                                    <Image
+                                      src={tab.tabLogo.url}
+                                      width={90}
+                                      height={40}
+                                      alt={tab.tabTitle}
+                                      className="h-8 w-auto object-contain object-left"
+                                    />
+                                    {tab.tabSubtitle && (
+                                      <p className="text-[12px] text-gray-500 font-semibold">
+                                        {tab.tabSubtitle}
+                                      </p>
+                                    )}
+                                  </div>
+                                  <ChevronRight
+                                    size={20}
+                                    className="text-gray-400 shrink-0"
+                                    strokeWidth={2.5}
+                                  />
+                                </Link>
+                              )
+                            }
+
+                            return (
+                              <div key={tabIdx} className="flex flex-col gap-1 pt-2 pb-2">
+                                <p className="text-[12px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                  {tab.tabTitle}
+                                </p>
+                                {tab.subLinks?.map((sub, sIdx) => (
+                                  <Link
+                                    key={sIdx}
+                                    href={sub.url}
+                                    onClick={closeMobileMenu}
+                                    className="text-[15px] font-semibold text-brand-ink py-2 border-b border-gray-100 last:border-0 hover:text-brand-orange transition-colors"
+                                  >
+                                    {sub.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
