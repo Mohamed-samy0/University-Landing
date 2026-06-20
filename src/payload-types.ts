@@ -112,8 +112,8 @@ export interface Config {
     partnerMarquee: PartnerMarquee;
     majorsSection: MajorsSection;
     graduateSection: GraduateSection;
-    applicationJourney: ApplicationJourney;
-    newsSection: NewsSection;
+    'application-journey': ApplicationJourney;
+    'news-section-global': NewsSectionGlobal;
     'site-settings': SiteSetting;
   };
   globalsSelect: {
@@ -127,8 +127,8 @@ export interface Config {
     partnerMarquee: PartnerMarqueeSelect<false> | PartnerMarqueeSelect<true>;
     majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
     graduateSection: GraduateSectionSelect<false> | GraduateSectionSelect<true>;
-    applicationJourney: ApplicationJourneySelect<false> | ApplicationJourneySelect<true>;
-    newsSection: NewsSectionSelect<false> | NewsSectionSelect<true>;
+    'application-journey': ApplicationJourneySelect<false> | ApplicationJourneySelect<true>;
+    'news-section-global': NewsSectionGlobalSelect<false> | NewsSectionGlobalSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: null;
@@ -907,10 +907,19 @@ export interface GraduateSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "applicationJourney".
+ * via the `definition` "application-journey".
  */
 export interface ApplicationJourney {
   id: string;
+  layout?: ApplicationJourneyBlock[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ApplicationJourneyBlock".
+ */
+export interface ApplicationJourneyBlock {
   tag: string;
   title: string;
   description: string;
@@ -921,23 +930,34 @@ export interface ApplicationJourney {
     description: string;
     id?: string | null;
   }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'applicationJourney';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-section-global".
+ */
+export interface NewsSectionGlobal {
+  id: string;
+  layout?: NewsSectionBlock[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newsSection".
+ * via the `definition` "NewsSectionBlock".
  */
-export interface NewsSection {
-  id: string;
+export interface NewsSectionBlock {
   tag: string;
   title: string;
   description: string;
   buttonText: string;
   buttonLink: string;
   featuredNews: (string | News)[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'newsSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1201,9 +1221,23 @@ export interface GraduateSectionSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "applicationJourney_select".
+ * via the `definition` "application-journey_select".
  */
 export interface ApplicationJourneySelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        applicationJourney?: T | ApplicationJourneyBlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ApplicationJourneyBlock_select".
+ */
+export interface ApplicationJourneyBlockSelect<T extends boolean = true> {
   tag?: T;
   title?: T;
   description?: T;
@@ -1216,24 +1250,36 @@ export interface ApplicationJourneySelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-section-global_select".
+ */
+export interface NewsSectionGlobalSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        newsSection?: T | NewsSectionBlockSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newsSection_select".
+ * via the `definition` "NewsSectionBlock_select".
  */
-export interface NewsSectionSelect<T extends boolean = true> {
+export interface NewsSectionBlockSelect<T extends boolean = true> {
   tag?: T;
   title?: T;
   description?: T;
   buttonText?: T;
   buttonLink?: T;
   featuredNews?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

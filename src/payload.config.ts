@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -25,9 +24,9 @@ import { MajorsSection } from './globals/MajorsSection'
 import { Majors } from './collections/Majors'
 import { GraduateSection } from './globals/GraduateSection'
 import { Graduates } from './collections/Graduates'
-import { ApplicationJourneyBlock } from './globals/ApplicationJourney'
-import { NewsSectionBlock } from './globals/NewsSection'
 import { SiteSettings } from './globals/SiteSettings'
+import { ApplicationJourney } from './globals/ApplicationJourney'
+import { NewsSection } from './globals/NewsSection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,8 +50,8 @@ export default buildConfig({
     PartnerMarquee,
     MajorsSection,
     GraduateSection,
-    ApplicationJourneyBlock,
-    NewsSectionBlock,
+    ApplicationJourney,
+    NewsSection,
     SiteSettings
   ],
   editor: lexicalEditor(),
