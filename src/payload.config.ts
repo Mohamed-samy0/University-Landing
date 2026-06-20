@@ -65,7 +65,8 @@ export default buildConfig({
   sharp,
   plugins: [
     vercelBlobStorage({
-      token: process.env.BLOB_READ_WRITE_TOKEN!,
+      enabled: true,
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
       collections: {
         media: true,
       },
