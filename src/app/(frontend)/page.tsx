@@ -67,7 +67,7 @@ export default async function HomePage() {
   })
 
   const rawNewsData = await payload.findGlobal({
-    slug: 'newsSection',
+    slug: 'news-section-global',
     depth: 2,
   })
 
