@@ -3,105 +3,102 @@ import { GlobalConfig } from 'payload'
 export const Footer: GlobalConfig = {
   slug: 'footer',
   admin: {
-    group: 'Landing Page Settings',
+    group: 'Global Settings',
   },
   access: {
     read: () => true,
   },
   fields: [
     {
-      name: 'logo',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      label: 'Footer Logo',
-    },
-    {
-      name: 'linkColumns',
-      type: 'array',
-      required: true,
-      label: 'Link Columns',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'title',
-          type: 'text',
-          required: true,
-          label: 'Column Title',
+          label: 'Layer 1: Top Footer',
+          fields: [
+            // Column 1
+            { name: 'logo', type: 'upload', relationTo: 'media', required: true },
+            { name: 'description', type: 'textarea', required: true },
+            { name: 'contactTitle', type: 'text', defaultValue: 'Contact Us', required: true },
+            // Column 2
+            { name: 'phone', type: 'text', required: true },
+            { name: 'email', type: 'text', required: true },
+            { name: 'address', type: 'textarea', required: true },
+            {
+              name: 'ctaButton',
+              type: 'group',
+              fields: [
+                { name: 'label', type: 'text', defaultValue: 'Apply Now' },
+                { name: 'url', type: 'text', defaultValue: '/apply' },
+              ],
+            },
+
+            // Column 3
+            { name: 'searchTitle', type: 'text', defaultValue: 'Looking For Something?' },
+            {
+              name: 'socialLinks',
+              type: 'array',
+              fields: [
+                {
+                  name: 'platform',
+                  type: 'select',
+                  options: [
+                    { label: 'Facebook', value: 'facebook' },
+                    { label: 'Instagram', value: 'instagram' },
+                    { label: 'LinkedIn', value: 'linkedin' },
+                    { label: 'X (Twitter)', value: 'twitter' },
+                    { label: 'YouTube', value: 'youtube' },
+                    { label: 'TikTok', value: 'tiktok' },
+                  ],
+                  required: true,
+                },
+                { name: 'url', type: 'text', required: true },
+                { name: 'searchButtonText', type: 'text', defaultValue: 'Search', required: true },
+              ],
+            },
+          ],
         },
         {
-          name: 'links',
-          type: 'array',
-          label: 'Links',
+          label: 'Layer 2: Mega Menu',
           fields: [
             {
-              name: 'text',
+              name: 'footerMenus',
+              type: 'array',
+              minRows: 1,
+              maxRows: 6,
+              fields: [
+                { name: 'title', type: 'text', required: true },
+                {
+                  name: 'links',
+                  type: 'array',
+                  fields: [
+                    { name: 'label', type: 'text', required: true },
+                    { name: 'url', type: 'text', required: true },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Layer 3: Bottom Bar',
+          fields: [
+            {
+              name: 'copyright',
               type: 'text',
               required: true,
-              label: 'Link Text',
+              defaultValue: '© 2024 The Knowledge Hub Universities. All rights reserved.',
             },
             {
-              name: 'url',
-              type: 'text',
-              required: true,
-              label: 'Link URL',
+              name: 'legalLinks',
+              type: 'array',
+              fields: [
+                { name: 'label', type: 'text', required: true },
+                { name: 'url', type: 'text', required: true },
+              ],
             },
           ],
         },
       ],
-    },
-    {
-      name: 'contactInfo',
-      type: 'group',
-      label: 'Contact Information',
-      fields: [
-        {
-          name: 'phone',
-          type: 'text',
-          label: 'Phone Number',
-        },
-        {
-          name: 'email',
-          type: 'text',
-          label: 'Email Address',
-        },
-        {
-          name: 'address',
-          type: 'textarea',
-          label: 'Physical Address',
-        },
-      ],
-    },
-    {
-      name: 'socialLinks',
-      type: 'array',
-      label: 'Social Media Links',
-      fields: [
-        {
-          name: 'platform',
-          type: 'select',
-          required: true,
-          label: 'Social Platform',
-          options: [
-            { label: 'Facebook', value: 'facebook' },
-            { label: 'Twitter', value: 'twitter' },
-            { label: 'Instagram', value: 'instagram' },
-            { label: 'LinkedIn', value: 'linkedin' },
-            { label: 'YouTube', value: 'youtube' },
-          ],
-        },
-        {
-          name: 'url',
-          type: 'text',
-          required: true,
-          label: 'Profile URL',
-        },
-      ],
-    },
-    {
-      name: 'copyrightText',
-      type: 'text',
-      label: 'Copyright Text',
-      defaultValue: '© 2025 University. All rights reserved.',
     },
   ],
 }

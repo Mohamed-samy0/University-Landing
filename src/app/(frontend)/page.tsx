@@ -11,6 +11,8 @@ import { NewsSectionData } from '@/components/news/News.types'
 import { NewsSection } from '@/components/news/NewsSection'
 import { ContactFormData } from '@/components/contact/ContactForm.types'
 import { ContactFormSection } from '@/components/contact/ContactFormSection'
+import { FooterData } from '@/components/footer/Footer.types'
+import { Footer } from '@/components/footer/Footer'
 
 export default async function HomePage() {
   const payload = await getPayload({ config: configPromise })
@@ -72,6 +74,12 @@ export default async function HomePage() {
 
   const contactData = rawContactData as unknown as ContactFormData
 
+  const rawFooterData = await payload.findGlobal({
+    slug: 'footer',
+  })
+
+  const footerData = rawFooterData as unknown as FooterData
+
   return (
     <div className="flex flex-col w-full">
       <Hero data={heroData} />
@@ -87,6 +95,7 @@ export default async function HomePage() {
       {contactData && contactData.fields && contactData.fields.length > 0 && (
         <ContactFormSection data={contactData} />
       )}
+      {footerData && <Footer data={footerData} />}
     </div>
   )
 }

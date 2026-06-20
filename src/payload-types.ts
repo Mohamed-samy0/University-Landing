@@ -793,30 +793,45 @@ export interface SectionTitle {
 export interface Footer {
   id: string;
   logo: string | Media;
-  linkColumns: {
-    title: string;
-    links?:
-      | {
-          text: string;
-          url: string;
-          id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-  }[];
-  contactInfo?: {
-    phone?: string | null;
-    email?: string | null;
-    address?: string | null;
+  description: string;
+  contactTitle: string;
+  phone: string;
+  email: string;
+  address: string;
+  ctaButton?: {
+    label?: string | null;
+    url?: string | null;
   };
+  searchTitle?: string | null;
   socialLinks?:
     | {
-        platform: 'facebook' | 'twitter' | 'instagram' | 'linkedin' | 'youtube';
+        platform: 'facebook' | 'instagram' | 'linkedin' | 'twitter' | 'youtube' | 'tiktok';
+        url: string;
+        searchButtonText: string;
+        id?: string | null;
+      }[]
+    | null;
+  footerMenus?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  copyright: string;
+  legalLinks?:
+    | {
+        label: string;
         url: string;
         id?: string | null;
       }[]
     | null;
-  copyrightText?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1053,34 +1068,47 @@ export interface SectionTitlesSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   logo?: T;
-  linkColumns?:
+  description?: T;
+  contactTitle?: T;
+  phone?: T;
+  email?: T;
+  address?: T;
+  ctaButton?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  searchTitle?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        searchButtonText?: T;
+        id?: T;
+      };
+  footerMenus?:
     | T
     | {
         title?: T;
         links?:
           | T
           | {
-              text?: T;
+              label?: T;
               url?: T;
               id?: T;
             };
         id?: T;
       };
-  contactInfo?:
+  copyright?: T;
+  legalLinks?:
     | T
     | {
-        phone?: T;
-        email?: T;
-        address?: T;
-      };
-  socialLinks?:
-    | T
-    | {
-        platform?: T;
+        label?: T;
         url?: T;
         id?: T;
       };
-  copyrightText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
