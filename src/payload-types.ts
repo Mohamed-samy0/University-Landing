@@ -665,8 +665,13 @@ export interface Hero {
   id: string;
   headline: string;
   subheadline: string;
-  backgroundImage: string | Media;
-  searchPlaceholder?: string | null;
+  backgroundType: 'image' | 'video';
+  backgroundImage?: (string | null) | Media;
+  backgroundVideo?: (string | null) | Media;
+  primaryButtonText?: string | null;
+  primaryButtonUrl?: string | null;
+  secondaryButtonText?: string | null;
+  secondaryButtonUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -939,8 +944,13 @@ export interface NewsSection {
 export interface HeroSelect<T extends boolean = true> {
   headline?: T;
   subheadline?: T;
+  backgroundType?: T;
   backgroundImage?: T;
-  searchPlaceholder?: T;
+  backgroundVideo?: T;
+  primaryButtonText?: T;
+  primaryButtonUrl?: T;
+  secondaryButtonText?: T;
+  secondaryButtonUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

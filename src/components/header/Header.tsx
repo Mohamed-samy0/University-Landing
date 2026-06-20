@@ -44,7 +44,7 @@ export const Header = ({ data }: HeaderProps) => {
   const activeTab = activeItem?.megaMenuTabs?.[activeTabIndex]
 
   return (
-    <header className="absolute top-4 inset-x-8 lg:inset-x-12 z-50 font-futura text-brand-ink">
+    <header className="fixed top-4 inset-x-8 lg:inset-x-12 z-50 font-futura text-brand-ink">
       <div
         className="bg-white/70 backdrop-blur-lg border border-white/40 rounded-[2.5rem] shadow-sm relative z-20"
         onMouseLeave={() => setActiveMenuIndex(null)}

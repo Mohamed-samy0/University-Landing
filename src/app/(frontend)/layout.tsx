@@ -2,8 +2,13 @@ import React from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { Header } from '@/components/header'
-import { Hero } from '@/components/hero'
-import './globals.css';
+import './globals.css'
+
+
+  export const metadata = {
+    title: 'The Knowledge Hub Universities',
+    description: 'Your Gateway To Global Education',
+  }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const payload = await getPayload({ config: configPromise })
