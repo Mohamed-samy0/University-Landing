@@ -63,7 +63,7 @@ export default async function HomePage() {
   })
 
   const journeyData = await payload.findGlobal({
-    slug: 'applicationJourney',
+    slug: 'application-journey',
   })
 
   const rawNewsData = await payload.findGlobal({

@@ -27,7 +27,7 @@ import { Graduates } from './collections/Graduates'
 import { SiteSettings } from './globals/SiteSettings'
 import { ApplicationJourney } from './globals/ApplicationJourney'
 import { NewsSection } from './globals/NewsSection'
-
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -52,7 +52,7 @@ export default buildConfig({
     GraduateSection,
     ApplicationJourney,
     NewsSection,
-    SiteSettings
+    SiteSettings,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -63,5 +63,12 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    vercelBlobStorage({
+      token: process.env.BLOB_READ_WRITE_TOKEN!,
+      collections: {
+        media: true,
+      },
+    }),
+  ],
 })
