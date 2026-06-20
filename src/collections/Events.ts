@@ -1,7 +1,11 @@
+import { revalidateCollection } from '@/lib/hooks/revalidate'
 import { CollectionConfig } from 'payload'
 
 export const Events: CollectionConfig = {
   slug: 'events',
+  hooks: {
+    afterChange: [revalidateCollection],
+  },
   admin: {
     useAsTitle: 'title',
     group: 'University Content',

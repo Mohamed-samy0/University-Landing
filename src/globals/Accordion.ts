@@ -1,7 +1,11 @@
+import { revalidateGlobal } from '@/lib/hooks/revalidate'
 import { GlobalConfig } from 'payload'
 
 export const Accordion: GlobalConfig = {
   slug: 'accordion',
+  hooks: {
+    afterChange: [revalidateGlobal],
+  },
   admin: { group: 'Landing Page Settings' },
   access: { read: () => true },
   fields: [

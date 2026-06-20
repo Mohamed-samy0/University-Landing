@@ -1,8 +1,12 @@
 // src/collections/Programs.ts
+import { revalidateCollection } from '@/lib/hooks/revalidate'
 import { CollectionConfig } from 'payload'
 
 export const Programs: CollectionConfig = {
   slug: 'programs',
+  hooks: {
+    afterChange: [revalidateCollection],
+  },
   admin: {
     useAsTitle: 'title',
     group: 'University Content',

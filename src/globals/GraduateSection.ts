@@ -1,7 +1,11 @@
+import { revalidateGlobal } from '@/lib/hooks/revalidate'
 import { GlobalConfig } from 'payload'
 
 export const GraduateSection: GlobalConfig = {
   slug: 'graduateSection',
+  hooks: {
+    afterChange: [revalidateGlobal],
+  },
   admin: { group: 'University Content' },
   access: { read: () => true },
   fields: [

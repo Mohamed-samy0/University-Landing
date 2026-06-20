@@ -13,9 +13,13 @@ import { ContactFormData } from '@/components/contact/ContactForm.types'
 import { ContactFormSection } from '@/components/contact/ContactFormSection'
 import { FooterData } from '@/components/footer/Footer.types'
 import { Footer } from '@/components/footer/Footer'
+import { Header } from '@/components/header'
 
 export default async function HomePage() {
   const payload = await getPayload({ config: configPromise })
+  const headerData = await payload.findGlobal({
+    slug: 'header',
+  })
   const heroData = await payload.findGlobal({
     slug: 'hero',
   })
@@ -82,6 +86,7 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col w-full">
+      <Header data={headerData} />
       <Hero data={heroData} />
       <AccordionSection data={accordionData} />
       <PartnerMarqueeSection data={partnerMarqueeData} />

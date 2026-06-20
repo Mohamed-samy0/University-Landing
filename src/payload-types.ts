@@ -114,6 +114,7 @@ export interface Config {
     graduateSection: GraduateSection;
     applicationJourney: ApplicationJourney;
     newsSection: NewsSection;
+    'site-settings': SiteSetting;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -128,6 +129,7 @@ export interface Config {
     graduateSection: GraduateSectionSelect<false> | GraduateSectionSelect<true>;
     applicationJourney: ApplicationJourneySelect<false> | ApplicationJourneySelect<true>;
     newsSection: NewsSectionSelect<false> | NewsSectionSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -939,6 +941,18 @@ export interface NewsSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: string;
+  metaTitle: string;
+  metaDescription: string;
+  ogImage?: (string | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
@@ -1217,6 +1231,18 @@ export interface NewsSectionSelect<T extends boolean = true> {
   buttonText?: T;
   buttonLink?: T;
   featuredNews?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  metaTitle?: T;
+  metaDescription?: T;
+  ogImage?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

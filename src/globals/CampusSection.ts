@@ -1,7 +1,11 @@
+import { revalidateGlobal } from '@/lib/hooks/revalidate'
 import { GlobalConfig } from 'payload'
 
 export const CampusSection: GlobalConfig = {
   slug: 'campus-section',
+  hooks: {
+    afterChange: [revalidateGlobal],
+  },
   admin: { group: 'Landing Page Settings' },
   fields: [
     { name: 'tag', type: 'text', label: 'Small Top Tag' },
