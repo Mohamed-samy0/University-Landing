@@ -1,11 +1,7 @@
-import { revalidateGlobal } from '@/lib/hooks/revalidate'
 import { Block } from 'payload'
 
 export const ApplicationJourneyBlock: Block = {
   slug: 'applicationJourney',
-  hooks: {
-    afterChange: [revalidateGlobal],
-  },
   interfaceName: 'ApplicationJourneyBlock',
   labels: {
     singular: 'Application Journey Section',

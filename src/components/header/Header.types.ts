@@ -15,18 +15,18 @@ export interface MegaMenuTab {
   tabSubtitle?: string
   tabLogo?: any 
   featuredImage?: any
-  subLinks?: NavigationLink[]
+  subLinks?: NavigationLink[] | null
 }
 
 export interface MainNavLink extends NavigationLink {
   hasMegaMenu?: boolean
-  megaMenuTabs?: MegaMenuTab[]
+  megaMenuTabs?: MegaMenuTab[] | null
 }
 
 export interface HeaderData {
   logo?: any
-  topNavLinks?: NavigationLink[]
-  mainNavLinks?: MainNavLink[]
+  topNavLinks?: NavigationLink[] | null
+  mainNavLinks?: MainNavLink[] | null
   ctaButton?: CTAButton
 }
 

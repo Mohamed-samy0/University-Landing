@@ -34,6 +34,8 @@ export interface FooterData {
   footerMenus: FooterMenu[]
   copyright: string
   legalLinks: FooterLink[]
+  contactTitle?: string | null;
+  searchButtonText?: string | null;
 }
 
 export interface FooterProps {

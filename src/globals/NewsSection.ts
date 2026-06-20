@@ -1,11 +1,7 @@
-import { revalidateGlobal } from '@/lib/hooks/revalidate'
 import { Block } from 'payload'
 
 export const NewsSectionBlock: Block = {
   slug: 'newsSection',
-  hooks: {
-    afterChange: [revalidateGlobal],
-  },
   interfaceName: 'NewsSectionBlock',
   fields: [
     { name: 'tag', type: 'text', defaultValue: 'Stay Updated', required: true },

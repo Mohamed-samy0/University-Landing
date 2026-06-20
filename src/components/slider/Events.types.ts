@@ -11,6 +11,7 @@ export interface EventItem {
   time: string
   location: string
   url?: string
+  description?: string | null;
 }
 
 export interface EventsSectionData {
